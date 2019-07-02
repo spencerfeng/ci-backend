@@ -1,0 +1,45 @@
+version: '3'
+services:
+  database:
+    image: mysql:5.7
+    container_name: database
+    environment:
+      - MYSQL_DATABASE=digital
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    restart: always
+    ports:
+      - 13306:3306
+
+  migration:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: migration
+    depends_on:
+      - database
+    working_dir: /usr/app
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules/
+    environment:
+      - MYSQL_HOST=database
+      - MYSQL_DATABASE=digital
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=
+      - MYSQL_PORT=3306
+    command: ["./wait-for-it.sh", "database:3306", "-s", "-t", "300", "--", "npm", "run", "migrate"]
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: server
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules/
+    environment:
+      - MYSQL_HOST=database
+      - MYSQL_DATABASE=digital
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=
+      - MYSQL_PORT=3306
