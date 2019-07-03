@@ -8,7 +8,7 @@ pipeline {
       steps {
         sh 'docker-compose up -d database'
         sh 'pwd'
-        sh 'docker-compose run migration'
+        sh 'docker-compose run -v .:/usr/app -v /usr/app/node_modules/ migration'
       }
     }
 
