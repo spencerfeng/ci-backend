@@ -8,8 +8,7 @@
     "setup": "docker-compose up -d database && docker-compose run migration",
     "migrate": "npx sequelize db:migrate",
     "start": "npm run setup && node server.js",
-    "dev": "npm run setup && nodemon server.js",
-    "begin": "node server.js"
+    "dev": "npm run setup && nodemon server.js"
   },
   "keywords": [],
   "author": "",
