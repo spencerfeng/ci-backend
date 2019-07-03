@@ -7,13 +7,7 @@ pipeline {
     stage('Setup database') {
       steps {
         sh 'docker-compose up -d database'
-        sh 'docker-compose run migration'
-      }
-    }
-
-    stage('Test') {
-      steps {
-        sh 'docker-compose run server npx mocha --recursive'
+        sh 'docker-compose up -d server'
       }
     }
 
