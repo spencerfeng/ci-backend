@@ -7,7 +7,7 @@ pipeline {
     stage('Setup database') {
       steps {
         sh 'docker-compose up -d database'
-        sh 'docker-compose up -d server'
+        sh 'docker-compose up server'
       }
     }
 
