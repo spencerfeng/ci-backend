@@ -27,7 +27,7 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=
       - MYSQL_PORT=3306
-    command: ["sleep", "1000000"]
+    command: ["./wait-for-it.sh", "database:3306", "-s", "-t", "300", "--", "npm", "run", "migrate"]
 
   server:
     build:
