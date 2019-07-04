@@ -12,6 +12,12 @@ pipeline {
       }
     }
 
+    stage('Test') {
+      steps {
+        sh 'docker-compose run server npx mocha --recursive'
+      }
+    }
+
   }
 
   post {
