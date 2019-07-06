@@ -22,7 +22,8 @@ pipeline {
 
   post {
     always {
-      sh 'docker image prune -fa'
+      sh 'docker stop database'
+      sh 'docker rm database'
     }
   }
 }
