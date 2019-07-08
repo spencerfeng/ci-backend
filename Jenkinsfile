@@ -14,7 +14,7 @@ pipeline {
 
     stage('Test') {
       steps {
-        sh 'docker-compose run server npx mocha --recursive'
+        sh 'docker-compose run test npx mocha --recursive'
       }
     }
 

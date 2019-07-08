@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "docker-compose run server npx mocha \"./test/**/*.spec.js\"",
+    "test": "docker-compose run test",
     "setup": "docker-compose up -d database && docker-compose run migration",
     "migrate": "npx sequelize db:migrate",
     "start": "npm run setup && node server.js",
