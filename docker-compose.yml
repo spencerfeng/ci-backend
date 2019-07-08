@@ -29,11 +29,11 @@ services:
       - MYSQL_PORT=3306
     command: ["./wait-for-it.sh", "database:3306", "-s", "-t", "300", "--", "npm", "run", "migrate"]
 
-  server:
+  test:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    container_name: server
+    container_name: test
     volumes:
       - .:/usr/app
       - /usr/app/node_modules/
@@ -43,3 +43,5 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=
       - MYSQL_PORT=3306
+    command: ["npx", "mocha", "\"./test/**/*.spec.js\""]
+    
